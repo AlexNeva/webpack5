@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
+
 let mode = 'development';
 let target = 'web';
 
@@ -11,13 +12,17 @@ if (process.env.NODE_ENV === 'production') {
   target = 'browserslist'
 }
 
+
+
+
+
 module.exports = {
   mode: mode,
   target: target,
 
   output: {
     path: path.resolve(__dirname, 'dist'),
-    assetModuleFilename: 'img/[hash][ext][query]'
+    assetModuleFilename: 'static/[hash][ext][query]'
   },
 
   module: {
@@ -25,6 +30,9 @@ module.exports = {
       {
         test: /\.(png|jpe?g|gif|webp|svg)$/i,
         type: 'asset/resource',
+        // generator: {
+        //   filename: 'static/[hash][ext][query]'
+        // }
       },
       {
         test: /\.(s[ac]|c)ss$/i,
@@ -47,12 +55,9 @@ module.exports = {
       },
       {
         test: /\.(eot|ttf|woff|woff2)$/,
-        use: [
-          {
-            loader: 'file-loader?name=./fonts/[name].[ext]'
-          },
-        ]
+        type: 'asset/resource',
       },
+
     ],
   },
 
