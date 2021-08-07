@@ -57,7 +57,15 @@ module.exports = {
         test: /\.(eot|ttf|woff|woff2)$/,
         type: 'asset/resource',
       },
-
+      {
+        test: /\.pug$/,
+        loader: 'pug-loader',
+        exclude: /node_modules/,
+        options: {
+          pretty: true,
+          self: true,
+        },
+      }
     ],
   },
 
@@ -65,7 +73,8 @@ module.exports = {
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
-      template: './src/index.html'
+      template: './src/pug/pages/index.pug',
+      filename: 'index.html',
     }),
   ],
 
